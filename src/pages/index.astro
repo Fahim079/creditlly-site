@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('news'))
+  .filter(p => !p.data.draft)
+  .sort((a,b) => (a.data.date < b.data.date ? 1 : -1));
+---
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8" /><title>Creditlly News</title></head>
+  <body>
+    <h1>Creditlly / News</h1>
+    <ul>
+      {posts.map(p => {
+        const slug = p.data.slug || p.slug;
+        return (
+          <li>
+            <a href={`/news/${slug}/`}>{p.data.title}</a> — {p.data.date}</li>
+        );
+      })}
+    </ul>
+  </body>
+</html>
