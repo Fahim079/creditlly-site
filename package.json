@@ -1,0 +1,13 @@
+{
+  "name": "creditlly-news",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^4.10.0",
+    "zod": "^3.23.8"
+  }
+}
