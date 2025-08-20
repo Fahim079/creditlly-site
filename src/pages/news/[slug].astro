@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+const all = await getCollection('news');
+const { slug } = Astro.params;
+const entry = all.find(p => (p.data.slug || p.slug) === slug);
+if (!entry) return Astro.redirect('/');
+
+const { title, description, metaDescription, date } = entry.data;
+const Content = await entry.render();
+const metaDesc = metaDescription || description || '';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="description" content={metaDesc} />
+  </head>
+  <body>
+    <article>
+      <h1>{title}</h1>
+      <p><em>{date}</em></p>
+      <Content.Content />
+    </article>
+  </body>
+</html>
