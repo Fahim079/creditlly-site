@@ -140,14 +140,15 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"news": Record<string, {
-  id: string;
-  slug: string;
+		"news": {
+"{{ $json.slug }}-{{ Date.now() }}.md": {
+	id: "{{ $json.slug }}-{{ Date.now() }}.md";
+  slug: "-jsonslug---datenow-";
   body: string;
   collection: "news";
-  data: InferEntrySchema<"news">;
-  render(): Render[".md"];
-}>;
+  data: InferEntrySchema<"news">
+} & { render(): Render[".md"] };
+};
 
 	};
 
