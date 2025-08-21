@@ -140,15 +140,14 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"news": {
-"{{ $json.slug }}-{{ Date.now() }}.md": {
-	id: "{{ $json.slug }}-{{ Date.now() }}.md";
-  slug: "-jsonslug---datenow-";
+		"news": Record<string, {
+  id: string;
+  slug: string;
   body: string;
   collection: "news";
-  data: InferEntrySchema<"news">
-} & { render(): Render[".md"] };
-};
+  data: any;
+  render(): Render[".md"];
+}>;
 
 	};
 
@@ -158,5 +157,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("../../src/content/config.js");
+	export type ContentConfig = never;
 }
